@@ -1,17 +1,46 @@
 import { useState } from "react"
 
-const AnecdoteLine = (props) => {
+const Title = ({ text }) => {
   return (
     <div>
-      <p>{props.anecdote}</p>
+      <h1>{text}</h1>
     </div>
   )
 }
 
-const Button = (props) => {
+const Button = ({ handleClick, text }) => {
+  return (
+    <>
+      <button onClick={handleClick}>{text}</button>
+    </>
+  )
+}
+
+const Anecdote = ({ anecdote, votes }) => {
   return (
     <div>
-      <button onClick={props.handleClick}>{props.text}</button>
+      <p>{anecdote}</p>
+      <p>Votes: {votes}</p>
+    </div>
+  )
+}
+
+const HighestRated = ({ anecdotes, votes }) => {
+  const highestVote = Math.max(...votes)
+  const anecdoteIndex = votes.indexOf(highestVote)
+  const anecdote = anecdotes[anecdoteIndex]
+
+  if (highestVote === 0) {
+    return (
+      <div>
+        <p>No anecdote has received a vote yet.</p>
+      </div>
+    )
+  }
+
+  return (
+    <div>
+      <Anecdote anecdote={anecdote} votes={votes[anecdoteIndex]} />
     </div>
   )
 }
@@ -29,16 +58,27 @@ const App = () => {
   ]
 
   const [selected, setSelected] = useState(0)
+  const [votes, setVotes] = useState(Array(8).fill(0))
 
-  const setAnecdote = () => {
-    const random = Math.trunc(Math.random() * anecdotes.length)
-    setSelected(random)
+  const updateVotes = () => {
+    const copyVotes = [...votes]
+    copyVotes[selected] = votes[selected] + 1
+    setVotes(copyVotes)
+  }
+
+  const changeAnecdote = () => {
+    const randomIndex = Math.trunc(Math.random() * anecdotes.length)
+    setSelected(randomIndex)
   }
 
   return (
     <div>
-      <AnecdoteLine anecdote={anecdotes[selected]} />
-      <Button handleClick={setAnecdote} text="Random anecdote" />
+      <Title text="Anecdote of the day" />
+      <Anecdote anecdote={anecdotes[selected]} votes={votes[selected]} />
+      <Button handleClick={updateVotes} text="Vote +1" />
+      <Button handleClick={changeAnecdote} text="Next anecdote" />
+      <Title text="Anecdote with most votes" />
+      <HighestRated anecdotes={anecdotes} votes={votes} />
     </div>
   )
 }
