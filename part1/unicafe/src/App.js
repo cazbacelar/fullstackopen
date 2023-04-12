@@ -9,11 +9,11 @@ const Button = ({ handleClick, text }) => {
 }
 
 // for displaying a single statistic line
-const StatisticLine = (props) => {
+const StatisticLine = ({ text, value }) => {
   return (
     <tr>
-      <td>{props.text}</td>
-      <td>{props.value}</td>
+      <td>{text}</td>
+      <td>{value}</td>
     </tr>
   )
 }
