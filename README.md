@@ -1,2 +1,2 @@
 # fullstackopen
-Exercise solutions for the Full Stack Open course
+Full Stack Open course exercises
