@@ -4,6 +4,6 @@
 
 ## Exercises
 
-- [0.4: new note](./0.4_new_note_diagram.md)
-- [0.5: Single page app](./0.5_spa_diagram.md)
-- [0.6: New note](./0.6_new_note_spa_diagram.md)
+- [0.4: New note diagram](./0.4_new_note_diagram.md)
+- [0.5: Single page app diagram](./0.5_spa_diagram.md)
+- [0.6: New note single page app diagram](./0.6_new_note_spa_diagram.md)
