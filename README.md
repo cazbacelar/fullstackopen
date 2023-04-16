@@ -1,2 +1,2 @@
 # Full Stack Open 2023 Exercises
-Full Stack Open course exercises
+The course is available at https://fullstackopen.com/en/
