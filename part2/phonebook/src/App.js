@@ -1,4 +1,7 @@
 import { useState } from "react"
+import Persons from "./components/Persons"
+import Search from "./components/Search"
+import PersonForm from "./components/PersonForm"
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -7,17 +10,21 @@ const App = () => {
     { name: "Dan Abramov", number: "12-43-234345", id: 3 },
     { name: "Mary Poppendieck", number: "39-23-6423122", id: 4 },
   ])
+  // eslint-disable-next-line no-unused-vars
+  const [personsCopy, setPersonsCopy] = useState(persons)
   const [newName, setNewName] = useState("")
   const [newNumber, setNewNumber] = useState("")
   const [newSearch, setNewSearch] = useState("")
-  const [allPersons, setAllPersons] = useState(persons)
 
   const handleSearchChange = (event) => {
     // store the current valute in a variable so we can use it for the search, otherwise we only get the current value when this function is called again
     const currentSearchValue = event.target.value
     setNewSearch(currentSearchValue)
-    const regex = new RegExp( currentSearchValue, 'i' );
-    setPersons(allPersons.filter(person => person.name.match(regex) || person.number.match(regex)))
+    const regex = new RegExp(currentSearchValue, "i")
+    const filteredPersons = personsCopy.filter(
+      (person) => person.name.match(regex) || person.number.match(regex)
+    )
+    setPersons(filteredPersons)
   }
 
   const handleNameChange = (event) => {
@@ -31,7 +38,6 @@ const App = () => {
   const checkDuplicates = () => {
     const names = persons.map((person) => person.name)
     return names.some((name) => name === newName)
-    // The some() method tests whether at least one element in the array passes the test implemented by the provided function. It returns true if, in the array, it finds an element for which the provided function returns true; otherwise it returns false. It doesn't modify the array.
   }
 
   const addPerson = (event) => {
@@ -45,6 +51,7 @@ const App = () => {
         id: persons.length + 1,
       }
       setPersons(persons.concat(newPerson))
+      setPersonsCopy(persons.concat(newPerson))
       setNewName("")
       setNewNumber("")
     } else {
@@ -55,27 +62,17 @@ const App = () => {
   return (
     <div>
       <h1>Phonebook</h1>
-      <div>
-        Search <input value={newSearch} onChange={handleSearchChange} />
-      </div>
+      <Search newSearch={newSearch} handleSearchChange={handleSearchChange} />
       <h2>Add a new contact</h2>
-      <form onSubmit={addPerson}>
-        <div>
-          name: <input value={newName} onChange={handleNameChange} />
-        </div>
-        <div>
-          number: <input value={newNumber} onChange={handleNumberChange} />
-        </div>
-        <div>
-          <button type="submit">add</button>
-        </div>
-      </form>
+      <PersonForm
+        handleSubmit={addPerson}
+        newName={newName}
+        newNumber={newNumber}
+        handleNameChange={handleNameChange}
+        handleNumberChange={handleNumberChange}
+      />
       <h2>Numbers</h2>
-      {persons.map((person) => (
-        <p key={person.id}>
-          {person.name} {person.number}
-        </p>
-      ))}
+      <Persons persons={persons} />
     </div>
   )
 }
