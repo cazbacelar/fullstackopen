@@ -1,6 +1,21 @@
-# Getting Started with Create React App
+# Phonebook 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+## Exercises 2.6-2.10
+
+Key things I learned from these exercises:
+
+- Get/edit the value of an input tag
+  - This is done by defining a new state to the component that will controll the input element
+  - By setting an onChange attribute to the input element, it calls an event handler function that will invoke the set function with the event.target.value, which is the value of the input, every time there's a change on it. This allows the user to edit the input.
+
+- Implement a form within a component
+  - The onSubmit attribute calls an event handler function that prevents the default state of submitting a form and handles adding a new person to the phonebook by creating a new object with the values from the inputs and concatenating this new object to the persons array
+
+- map(), some() and filter() methods
+  - some() is part of the checkDuplicates function, which creates a new array with persons names (using map()), and then uses the some method to check if the name in the input's value submitted by the user already exists in the persons names array. This prevent the user from adding name duplicates in the phonebook.
+  - filter() is part of the event handler funciton that handles the changes on the search input. It filters the AllPersons array, which is initialised as a copy off the persons array (just so we don't manipulate the persons array), checking if the search input's value is present in any persons name or number. It returns an array with the matches and this array is passed as argument to the setPersons function, which will rerender the component and set the persons array to this filtered array, and this will get printed on the screen, allowing the user to see the results of their search for each new character they enter in the search input field.
 
 ## Available Scripts
 
