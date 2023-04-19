@@ -4,7 +4,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Exercises 2.6-2.10
 
-Key things I learned from these exercises:
+Important things I learned from these exercises:
 
 - Get/edit the value of an input tag
   - This is done by defining a new state to the component that will controll the input element
