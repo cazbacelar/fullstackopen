@@ -1,20 +1,26 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import axios from "axios"
 import Persons from "./components/Persons"
 import Search from "./components/Search"
 import PersonForm from "./components/PersonForm"
 
 const App = () => {
-  const [persons, setPersons] = useState([
-    { name: "Arto Hellas", number: "040-123456", id: 1 },
-    { name: "Ada Lovelace", number: "39-44-5323523", id: 2 },
-    { name: "Dan Abramov", number: "12-43-234345", id: 3 },
-    { name: "Mary Poppendieck", number: "39-23-6423122", id: 4 },
-  ])
+  const [persons, setPersons] = useState([])
   // eslint-disable-next-line no-unused-vars
   const [personsCopy, setPersonsCopy] = useState(persons)
   const [newName, setNewName] = useState("")
   const [newNumber, setNewNumber] = useState("")
   const [newSearch, setNewSearch] = useState("")
+
+  useEffect(() => {
+    axios
+      // the command axios.get initiates the fetching of data from the server
+      .get("http://localhost:3001/persons")
+      // and registers the following function as an event handler for the operation
+      .then((response) => {
+        setPersons(response.data)
+      })
+  }, [])
 
   const handleSearchChange = (event) => {
     // store the current valute in a variable so we can use it for the search, otherwise we only get the current value when this function is called again
