@@ -2,9 +2,9 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Exercises 2.6-2.10
-
 Important things I learned from these exercises:
+
+## Exercises 2.6-2.10
 
 - Get/edit the value of an input tag
   - This is done by defining a new state to the component that will controll the input element
@@ -16,6 +16,17 @@ Important things I learned from these exercises:
 - map(), some() and filter() methods
   - some() is part of the checkDuplicates function, which creates a new array with persons names (using map()), and then uses the some method to check if the name in the input's value submitted by the user already exists in the persons names array. This prevent the user from adding name duplicates in the phonebook.
   - filter() is part of the event handler funciton that handles the changes on the search input. It filters the AllPersons array, which is initialised as a copy off the persons array (just so we don't manipulate the persons array), checking if the search input's value is present in any persons name or number. It returns an array with the matches and this array is passed as argument to the setPersons function, which will rerender the component and set the persons array to this filtered array, and this will get printed on the screen, allowing the user to see the results of their search for each new character they enter in the search input field.
+  
+## Exercise 2.11
+- Get data from the server
+  - Use the JSON Server tool to act as the server and create the db.json file to store the data.
+- npm packages 
+  - axios library for communicaiton between the browser and the server
+  - json-server as a development dependency
+- Fetch data from the server
+  - Use effect hook to perform side effects on function components, like data fetching
+  - Use the axios.get() method with the url that contains the data from the server - this returns a promise.
+  - When data arrives from the server, the JavaScript runtime calls the event handler function with the response object and stores the array received from the server into the state using the function setPersons(response.data).
 
 ## Available Scripts
 
