@@ -53,16 +53,37 @@ const App = () => {
         // id: persons.length + 1,
       }
 
-      personService
-        .create(newPerson)
-        .then(returnedPerson => {
-          setPersons(persons.concat(returnedPerson))
-          setPersonsCopy(persons.concat(returnedPerson))
-          setNewName("")
-          setNewNumber("")
-        })
+      personService.create(newPerson).then((returnedPerson) => {
+        setPersons(persons.concat(returnedPerson))
+        setPersonsCopy(persons.concat(returnedPerson))
+        setNewName("")
+        setNewNumber("")
+      })
     } else {
-      alert(`${newName} is already added to phonebook`)
+      // code here
+      if (
+        !window.confirm(
+          `${newName} is already added to phonebook. Replace the old number with new one?`
+        )
+      ) {
+        return
+      }
+      const person = persons.find((person) => person.name === newName)
+      const updatedPerson = { ...person, number: newNumber }
+      personService
+        .update(updatedPerson.id, updatedPerson)
+        .then((returnedPerson) => {
+          setPersons(
+            persons.map((person) =>
+              person.id !== updatedPerson.id ? person : returnedPerson
+            )
+          )
+          setPersonsCopy(
+            persons.map((person) =>
+              person.id !== updatedPerson.id ? person : returnedPerson
+            )
+          )
+        })
     }
   }
 
