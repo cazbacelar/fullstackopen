@@ -6,7 +6,6 @@ import PersonForm from "./components/PersonForm"
 
 const App = () => {
   const [persons, setPersons] = useState([])
-  // eslint-disable-next-line no-unused-vars
   const [personsCopy, setPersonsCopy] = useState(persons)
   const [newName, setNewName] = useState("")
   const [newNumber, setNewNumber] = useState("")
@@ -19,6 +18,7 @@ const App = () => {
       // and registers the following function as an event handler for the operation
       .then((response) => {
         setPersons(response.data)
+        setPersonsCopy(response.data)
       })
   }, [])
 
@@ -54,12 +54,16 @@ const App = () => {
       const newPerson = {
         name: newName,
         number: newNumber,
-        id: persons.length + 1,
+        // id: persons.length + 1,
       }
-      setPersons(persons.concat(newPerson))
-      setPersonsCopy(persons.concat(newPerson))
-      setNewName("")
-      setNewNumber("")
+      axios
+        .post('http://localhost:3001/persons', newPerson)
+        .then(response => {
+          setPersons(persons.concat(response.data))
+          setPersonsCopy(persons.concat(response.data))
+          setNewName("")
+          setNewNumber("")
+        })
     } else {
       alert(`${newName} is already added to phonebook`)
     }
