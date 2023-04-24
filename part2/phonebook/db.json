@@ -1,5 +1,5 @@
 {
-  "persons":[
+  "persons": [
     {
       "name": "Arto Hellas",
       "number": "040-123456",
@@ -19,6 +19,16 @@
       "name": "Mary Poppendieck",
       "number": "39-23-6423122",
       "id": 4
+    },
+    {
+      "name": "Olivia Greene",
+      "number": "23-47-382946",
+      "id": 5
+    },
+    {
+      "name": "Madison Taylor",
+      "number": "(555) 567-8901",
+      "id": 6
     }
   ]
 }

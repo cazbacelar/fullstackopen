@@ -3,6 +3,7 @@ import axios from "axios"
 import Persons from "./components/Persons"
 import Search from "./components/Search"
 import PersonForm from "./components/PersonForm"
+import personService from "./services/persons"
 
 const App = () => {
   const [persons, setPersons] = useState([])
@@ -12,14 +13,10 @@ const App = () => {
   const [newSearch, setNewSearch] = useState("")
 
   useEffect(() => {
-    axios
-      // the command axios.get initiates the fetching of data from the server
-      .get("http://localhost:3001/persons")
-      // and registers the following function as an event handler for the operation
-      .then((response) => {
-        setPersons(response.data)
-        setPersonsCopy(response.data)
-      })
+    personService.getAll().then((initialPersons) => {
+      setPersons(initialPersons)
+      setPersonsCopy(initialPersons)
+    })
   }, [])
 
   const handleSearchChange = (event) => {
@@ -56,11 +53,12 @@ const App = () => {
         number: newNumber,
         // id: persons.length + 1,
       }
-      axios
-        .post('http://localhost:3001/persons', newPerson)
-        .then(response => {
-          setPersons(persons.concat(response.data))
-          setPersonsCopy(persons.concat(response.data))
+
+      personService
+        .create(newPerson)
+        .then(returnedPerson => {
+          setPersons(persons.concat(returnedPerson))
+          setPersonsCopy(persons.concat(returnedPerson))
           setNewName("")
           setNewNumber("")
         })
