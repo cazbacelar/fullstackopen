@@ -1,18 +1,34 @@
-const Person = ({ name, number }) => {
+const DeleteButton = ({ handleDelete }) => {
+  return (
+    <>
+      <button onClick={handleDelete}>Delete</button>
+    </>
+  )
+}
+
+const Person = ({ name, number, handleDelete }) => {
   return (
     <div>
-      <p>{name} {number}</p>
+      <p>
+        {name} {number} <DeleteButton handleDelete={handleDelete} name={name} />
+      </p>
     </div>
   )
 }
 
-const Persons = (props) => {
+const Persons = ({ persons, handleDelete }) => {
   // props.persons = array of objects
-  const persons = props.persons
 
   return (
     <div>
-      {persons.map((person) => <Person key={person.id} name={person.name} number={person.number} />)}
+      {persons.map((person) => (
+        <Person
+          key={person.id}
+          name={person.name}
+          number={person.number}
+          handleDelete={() => handleDelete(person.id, person.name)}
+        />
+      ))}
     </div>
   )
 }
