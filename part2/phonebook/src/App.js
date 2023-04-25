@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import Persons from "./components/Persons"
 import Search from "./components/Search"
+import Notification from "./components/Notification"
 import PersonForm from "./components/PersonForm"
 import personService from "./services/persons"
 
@@ -10,6 +11,7 @@ const App = () => {
   const [newName, setNewName] = useState("")
   const [newNumber, setNewNumber] = useState("")
   const [newSearch, setNewSearch] = useState("")
+  const [message, setMessage] = useState(null)
 
   useEffect(() => {
     personService.getAll().then((initialPersons) => {
@@ -26,6 +28,10 @@ const App = () => {
     const filteredPersons = personsCopy.filter(
       (person) => person.name.match(regex) || person.number.match(regex)
     )
+    console.log(currentSearchValue)
+    console.log(filteredPersons)
+    console.log(persons)
+    console.log(personsCopy)
     setPersons(filteredPersons)
   }
 
@@ -50,14 +56,17 @@ const App = () => {
       const newPerson = {
         name: newName,
         number: newNumber,
-        // id: persons.length + 1,
       }
 
       personService.create(newPerson).then((returnedPerson) => {
         setPersons(persons.concat(returnedPerson))
-        setPersonsCopy(persons.concat(returnedPerson))
+        setPersonsCopy(personsCopy.concat(returnedPerson))
         setNewName("")
         setNewNumber("")
+        setMessage(`${newPerson.name} was successfully added to the phonebook.`)
+        setTimeout(() => {
+          setMessage(null)
+        }, 5000)
       })
     } else {
       // code here
@@ -79,10 +88,24 @@ const App = () => {
             )
           )
           setPersonsCopy(
-            persons.map((person) =>
+            personsCopy.map((person) =>
               person.id !== updatedPerson.id ? person : returnedPerson
             )
           )
+          setNewName("")
+          setNewNumber("")
+          setMessage(`${updatedPerson.name}'s number was successfully updated.`)
+          setTimeout(() => {
+            setMessage(null)
+          }, 5000)
+        })
+        .catch((error) => {
+          setMessage(`Information of ${updatedPerson.name} has already been removed from server.`)
+          setTimeout(() => {
+            setMessage(null)
+          }, 5000)
+          setPersons(persons.filter(person => person.id !== updatedPerson.id))
+          setPersonsCopy(personsCopy.filter(person => person.id !== updatedPerson.id))
         })
     }
   }
@@ -92,17 +115,30 @@ const App = () => {
       return
     }
 
-    personService.destroy(id).then(() => {
-      personService.getAll().then((initialPersons) => {
-        setPersons(initialPersons)
-        setPersonsCopy(initialPersons)
+    personService
+      .destroy(id)
+      .then(() => {
+        setMessage(`${name} was successfully deleted from the phonebook.`)
+        setTimeout(() => {
+          setMessage(null)
+        }, 5000)
+        setPersons(persons.filter(person => person.id !== id))
+        setPersonsCopy((personsCopy.filter(person => person.id !== id)))
       })
-    })
+      .catch((error) => {
+        setMessage(`Information of ${name} has already been removed from server.`)
+        setTimeout(() => {
+          setMessage(null)
+        }, 5000)
+        setPersons(persons.filter(person => person.id !== id))
+        setPersonsCopy((personsCopy.filter(person => person.id !== id)))
+      })
   }
 
   return (
     <div>
       <h1>Phonebook</h1>
+      <Notification message={message} />
       <Search newSearch={newSearch} handleSearchChange={handleSearchChange} />
       <h2>Add a new contact</h2>
       <PersonForm
