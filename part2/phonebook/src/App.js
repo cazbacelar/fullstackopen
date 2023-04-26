@@ -13,6 +13,7 @@ const App = () => {
   const [newSearch, setNewSearch] = useState("")
   const [message, setMessage] = useState(null)
 
+  // the effect is executed only after the first render
   useEffect(() => {
     personService.getAll().then((initialPersons) => {
       setPersons(initialPersons)
@@ -28,10 +29,6 @@ const App = () => {
     const filteredPersons = personsCopy.filter(
       (person) => person.name.match(regex) || person.number.match(regex)
     )
-    console.log(currentSearchValue)
-    console.log(filteredPersons)
-    console.log(persons)
-    console.log(personsCopy)
     setPersons(filteredPersons)
   }
 
@@ -100,12 +97,16 @@ const App = () => {
           }, 5000)
         })
         .catch((error) => {
-          setMessage(`Information of ${updatedPerson.name} has already been removed from server.`)
+          setMessage(
+            `Information of ${updatedPerson.name} has already been removed from server.`
+          )
           setTimeout(() => {
             setMessage(null)
           }, 5000)
-          setPersons(persons.filter(person => person.id !== updatedPerson.id))
-          setPersonsCopy(personsCopy.filter(person => person.id !== updatedPerson.id))
+          setPersons(persons.filter((person) => person.id !== updatedPerson.id))
+          setPersonsCopy(
+            personsCopy.filter((person) => person.id !== updatedPerson.id)
+          )
         })
     }
   }
@@ -122,16 +123,18 @@ const App = () => {
         setTimeout(() => {
           setMessage(null)
         }, 5000)
-        setPersons(persons.filter(person => person.id !== id))
-        setPersonsCopy((personsCopy.filter(person => person.id !== id)))
+        setPersons(persons.filter((person) => person.id !== id))
+        setPersonsCopy(personsCopy.filter((person) => person.id !== id))
       })
       .catch((error) => {
-        setMessage(`Information of ${name} has already been removed from server.`)
+        setMessage(
+          `Information of ${name} has already been removed from server.`
+        )
         setTimeout(() => {
           setMessage(null)
         }, 5000)
-        setPersons(persons.filter(person => person.id !== id))
-        setPersonsCopy((personsCopy.filter(person => person.id !== id)))
+        setPersons(persons.filter((person) => person.id !== id))
+        setPersonsCopy(personsCopy.filter((person) => person.id !== id))
       })
   }
 
