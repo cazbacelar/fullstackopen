@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react"
 import axios from "axios"
 
-const Result = ({ countries }) => {
+const Result = ({ countries, setFilteredCountries }) => {
   // countries will be an array with objects and we display something depending on the length of the array (accordingly to how many countries were found)
+
   if (countries.length > 10) {
     return (
       <div><p>Too many matches, specify another filter</p></div>
@@ -11,7 +12,7 @@ const Result = ({ countries }) => {
     console.log(countries)
     return (
       <ul>
-        {countries.map(country => <li key={country.ccn3}>{country.name.common}</li>)}
+        {countries.map(country => <li key={country.ccn3}>{country.name.common} <button onClick={() => setFilteredCountries([country])}>show</button></li>)}
       </ul>
     )
   } else if (countries.length === 1) {
@@ -65,7 +66,7 @@ const App = () => {
     <div>
       <h1>Countries Information</h1>
       <input value={searchValue} onChange={handleSearchChange} placeholder='Search country' autoFocus />
-      <Result countries={filteredCountries} />
+      <Result countries={filteredCountries} setFilteredCountries={setFilteredCountries} />
     </div>
   )
 }
