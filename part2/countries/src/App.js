@@ -43,15 +43,8 @@ const App = () => {
       />
       <Result
         countries={filteredCountries}
-        setFilteredCountries={setFilteredCountries}
-        setSearchValue={setSearchValue}
         handleShowButton={handleShowButton}
       />
-      <p>Powered by{" "}
-        <a href="https://www.weatherapi.com/" title="Free Weather API">
-          WeatherAPI.com
-        </a>
-      </p>
     </div>
   )
 }

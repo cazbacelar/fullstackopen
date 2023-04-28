@@ -1,5 +1,6 @@
 import Countries from "./Countries"
 import Country from "./Country"
+import Footer from "./Footer"
 
 const Result = ({ countries, handleShowButton }) => {
   // countries will be an array with objects and we display something depending on the length of the array (accordingly to how many countries were found)
@@ -21,6 +22,7 @@ const Result = ({ countries, handleShowButton }) => {
     return (
       <div>
         <Country country={country}/>
+        <Footer />
       </div>
     )
   } else {
