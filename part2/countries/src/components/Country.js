@@ -23,16 +23,16 @@ const Country = ({ country }) => {
 
   return (
     <div>
-      <h2>{country.name.common} {country.flag}</h2>
+      <h1>{country.name.common} {country.flag}</h1>
       <p>Capital: {country.capital}</p>
       <p>Area: {country.area}</p>
-      <h3>Languages:</h3>
+      <h2>Languages:</h2>
       <ul>
         {Object.values(country.languages).map((lang) => (
           <li key={lang}>{lang}</li>
         ))}
       </ul>
-      <h3>Weather in {country.capital}</h3>
+      <h2>Weather in {country.capital}</h2>
       <p>Temperature: {weather} Celcius</p>
       <p>{condition}</p>
       <img src={icon} alt="Weather icon"></img>

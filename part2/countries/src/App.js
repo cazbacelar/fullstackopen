@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import Search from "./components/Search"
 import Result from "./components/Result"
+import Footer from "./components/Footer"
 
 const App = () => {
   const [searchValue, setSearchValue] = useState("")
@@ -35,16 +36,19 @@ const App = () => {
   }
 
   return (
-    <div>
-      <h1>Countries Information</h1>
-      <Search
-        searchValue={searchValue}
-        handleSearchChange={handleSearchChange}
-      />
-      <Result
-        countries={filteredCountries}
-        handleShowButton={handleShowButton}
-      />
+    <div className="page-container">
+      <div className="content-wrap">
+        <h1 className="app-title">Country Explorer</h1>
+        <Search
+          searchValue={searchValue}
+          handleSearchChange={handleSearchChange}
+        />
+        <Result
+          countries={filteredCountries}
+          handleShowButton={handleShowButton}
+        />
+      </div>
+      <Footer />
     </div>
   )
 }
