@@ -1,10 +1,12 @@
 # Phonebook 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the frontend part of the phonebook app project for the Full Stack Open course, a React application, bootstrapped with [Create React App](https://github.com/facebook/create-react-app), that represents a phonebook where users can add, update, and delete contacts.
 
-Important things I learned from these exercises:
+The application has multiple components. The main component is App, which handles the state of the application and renders the other components.
 
-## Exercises 2.6-2.10
+The state of the application is managed using the useState hook. The useEffect hook is also used to fetch the initial list of contacts from the phonebook API when the component mounts.
+
+## Notes on exercises 2.6-2.10
 
 - Get/edit the value of an input tag
   - This is done by defining a new state to the component that will controll the input element
