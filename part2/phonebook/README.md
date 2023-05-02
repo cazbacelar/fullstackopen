@@ -4,9 +4,9 @@ This is the frontend part of the phonebook app project for the Full Stack Open c
 
 The application has multiple components. The main component is App, which handles the state of the application and renders the other components.
 
-The state of the application is managed using the useState hook. The useEffect hook is also used to fetch the initial list of contacts from the phonebook API when the component mounts.
+The state of the application is managed using the useState and useEffect hooks. The useEffect hook is also used to fetch the initial list of contacts from the phonebook API when the component mounts.
 
-## Notes on exercises 2.6-2.10
+## Notes - exercises 2.6-2.10
 
 - Get/edit the value of an input tag
   - This is done by defining a new state to the component that will controll the input element
@@ -19,7 +19,7 @@ The state of the application is managed using the useState hook. The useEffect h
   - some() is part of the checkDuplicates function, which creates a new array with persons names (using map()), and then uses the some method to check if the name in the input's value submitted by the user already exists in the persons names array. This prevent the user from adding name duplicates in the phonebook.
   - filter() is part of the event handler funciton that handles the changes on the search input. It filters the AllPersons array, which is initialised as a copy off the persons array (just so we don't manipulate the persons array), checking if the search input's value is present in any persons name or number. It returns an array with the matches and this array is passed as argument to the setPersons function, which will rerender the component and set the persons array to this filtered array, and this will get printed on the screen, allowing the user to see the results of their search for each new character they enter in the search input field.
   
-## Exercise 2.11
+## Notes - exercise 2.11
 - Get data from the server
   - Use the JSON Server tool to act as the server and create the db.json file to store the data.
 - npm packages 
