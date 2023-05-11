@@ -4,4 +4,4 @@
 ## Table of contents
 - [Front-end - React application](https://github.com/cazbacelar/fullstackopen/tree/main/part2/phonebook)
 - [Back-end](https://github.com/cazbacelar/fullstackopen/tree/main/part2/phonebook)
-- [Live application](https://ancient-bird-6685.fly.dev/)
+- [Live app](https://ancient-bird-6685.fly.dev/)
