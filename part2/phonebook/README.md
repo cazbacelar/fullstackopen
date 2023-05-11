@@ -1,6 +1,8 @@
 # Phonebook 
 
-This is the frontend part of the phonebook app project for the Full Stack Open course, a React application, bootstrapped with [Create React App](https://github.com/facebook/create-react-app), that represents a phonebook where users can add, update, and delete contacts.
+This is the frontend part of the phonebook app project for the Full Stack Open course, a React application, bootstrapped with [Create React App](https://github.com/facebook/create-react-app), that represents a phonebook where users can add, update, and delete contacts. The application was deployed to the internet with fly.io and can be found in the following URL: https://ancient-bird-6685.fly.dev/
+
+<img width="600" src="./media/phonebook.gif">
 
 The application has multiple components. The main component is App, which handles the state of the application and renders the other components.
 
